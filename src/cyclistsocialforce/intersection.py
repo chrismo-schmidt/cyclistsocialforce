@@ -71,7 +71,7 @@ class SocialForceIntersection:
                     
                     #ax.plot(x_i, y_i, color="green")
                     self.inEdges[e.getID()].append((x_i,y_i))
-
+                    #self.inEdges[e.getID()] = (x_i,y_i)
             
             for e in node.getOutgoing():
                 lanes = e.getLanes()
@@ -126,11 +126,15 @@ class SocialForceIntersection:
             
             #determine closest incoming lane
             lanepoints = self.inEdges[ecurrent]
-            xpoints = np.concatenate((lanepoints[0][0], lanepoints[1][0]))
-            ypoints = np.concatenate((lanepoints[0][1], lanepoints[1][1]))
-            d = np.sqrt((xpoints-user.s[0])**2 +
-                        (ypoints-user.s[1])**2)
-            laneid_in = int(np.argmin(d)/2)
+            if len(lanepoints)>1:
+                #more then 1 ingoing lane
+                xpoints = np.concatenate((lanepoints[0][0], lanepoints[1][0]))
+                ypoints = np.concatenate((lanepoints[0][1], lanepoints[1][1]))
+                d = np.sqrt((xpoints-user.s[0])**2 +
+                            (ypoints-user.s[1])**2)
+                laneid_in = int(np.argmin(d)/2)
+            else:
+                laneid_in = 0
 
             #randomly select outgoing lane
             laneid_out = np.random.randint(0, len(self.outEdges[enext]))                
