@@ -11,6 +11,8 @@ import sumolib
 import traci
 import traceback
 
+from math import sqrt, floor, ceil
+
 from cyclistsocialforce.vehicle import Vehicle
 from cyclistsocialforce.intersection import SocialForceIntersection
 from cyclistsocialforce.utils import angleSUMOtoSFM
@@ -51,15 +53,19 @@ class Scenario:
             self.fig = plt.figure()
         j = 1
         
+        ninter = len(nodes)
+        nrows = floor(sqrt(ninter))
+        ncols = ceil(sqrt(ninter))
+        
         #create intersections for SFM modelling
-        for i in range(len(nodes)):
+        for i in range(ninter):
             #only include nodes that are not dead ends
             if len(nodes[i].getIncoming()) < 2 and \
                len(nodes[i].getOutgoing()) < 2:
                 continue
             
             if self.animate:
-                ax = self.fig.add_subplot(1, 1, 1)
+                ax = self.fig.add_subplot(nrows, ncols, j)
                 j += 1
                 
                 self.intersections.append(SocialForceIntersection([], 
