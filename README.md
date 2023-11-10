@@ -1,4 +1,4 @@
-Preferred Velocities: Modified Social Forces for Cyclists with Realistic Dynamics in SUMO
+Cyclistsocialforce: Modified Social Forces for Cyclists with Realistic Dynamics in SUMO
 ==============================
 
 This is a working repostory for a package that implements a modified social force model for cyclists. Instead of accelerations, our social forces represent the preferred velocities of a cyclist to their destination and around obstacles. This allows to introduce a 2D kinematic bicycle model and two controllers for acceleration and steer. The original social force model for pedestrians was introduced by Helbing and Molnár (1995). Our model uses the separation into tactical and operational behavior introduced by Twaddle (2017).
