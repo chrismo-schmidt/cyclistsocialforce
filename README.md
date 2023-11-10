@@ -3,17 +3,17 @@ Cyclistsocialforce: Modified Social Forces for Cyclists with Realistic Dynamics 
 
 This is a working repostory for a package that implements a modified social force model for cyclists. Instead of accelerations, our social forces represent the preferred velocities of a cyclist to their destination and around obstacles. This allows to introduce a various controlled models of bicycle dynamics. The original social force model for pedestrians was introduced by Helbing and Molnár (1995). Our model uses the separation into tactical and operational behavior introduced by Twaddle (2017) and currently only addresses operational behaviour. 
 
-The model supports co-simulation with [Eclipse SUMO ](https://eclipse.dev/sumo/) via sumolib and the [TraCI]([TraCI - SUMO Documentation](https://sumo.dlr.de/docs/TraCI.html))/[Libsumo]([Libsumo - SUMO Documentation](https://sumo.dlr.de/docs/Libsumo.html)) interface.  
+The model supports co-simulation with [Eclipse SUMO ](https://eclipse.dev/sumo/) via sumolib and the [TraCI](https://sumo.dlr.de/docs/TraCI.html)/[Libsumo](https://sumo.dlr.de/docs/Libsumo.html) interface.  
 
 The model is developed for our contribution to the [2023 Bicycle and Motorcycle Dynamics Conference, 18-20 October 2023, Delft, Netherlands](https://dapp.orvium.io/deposits/649d4037c2c818c6824899bd/view), in the context of my PhD project at TU Delft. Refer to our conference proceedings preprint for more explanation. If you use this model in your research, please cite it as indicted below. 
 
 We provide three different bicycle models:
 
-- `vehicle.Bicycle`: Simple two-wheeler kinematics without wheel slip. ([Model from v0.1.x]([Release v0.1.1 (BMD2023 Extended Abstract) · chrismo-schmidt/cyclistsocialforce · GitHub](https://github.com/chrismo-schmidt/cyclistsocialforce/releases/tag/v0.1.1-bmd2023extendedabstract)))
+- `vehicle.Bicycle`: Simple two-wheeler kinematics without wheel slip. (Model from [v0.1.x](https://github.com/chrismo-schmidt/cyclistsocialforce/releases/tag/v0.1.1-bmd2023extendedabstract))
 
-- `vehicle.InvertedPendulumBicycle`: Two-Wheeler kinematics with an inverted pendulum on top to simulate bicycle roll. A nested control loop ensures that the bicycle stays upright while following the desired yaw angle given by the social force. Additionally, the model includes new repulsive force field shapes and path planning based destination forces. Introduced with v.1.1.0
+- `vehicle.InvertedPendulumBicycle`: Two-Wheeler kinematics with an inverted pendulum on top to simulate bicycle roll. A nested control loop ensures that the bicycle stays upright while following the desired yaw angle given by the social force. Additionally, the model includes new repulsive force field shapes and path planning based destination forces. Introduced with [v.1.1.0](https://github.com/chrismo-schmidt/cyclistsocialforce/releases/tag/v1.1.0-bmd2023proceedingspaper)
 
-- `vehicle.TwoDBicycle`: Same two-wheeler kinematics as Bicycle, but with the modified repulsive force fields and path planning of InvertedPendulumBicycle. Introduced with v.1.1.0
+- `vehicle.TwoDBicycle`: Same two-wheeler kinematics as Bicycle, but with the modified repulsive force fields and path planning of InvertedPendulumBicycle. Introduced with [v.1.1.0](https://github.com/chrismo-schmidt/cyclistsocialforce/releases/tag/v1.1.0-bmd2023proceedingspaper)
 
 ### Disclaimer
 
@@ -38,7 +38,7 @@ The package is research code under development. It may contain bugs and sections
 
 ## Demos
 
-The package comes with three demos. The first demo shows a simple interaction between three cyclists in open space. The script is pre-coded with an encroachment conflict and runs as a standalone without SUMO. Running the script produces an animation of the interaction and a plot of the vehicle states.  The second demo shows co-simulation of an intersection with SUMO. It launches the SUMO GUI and creates a small scenario of a three-legged intersection with random bicycle demand. On the road segments, cyclists are controlled by SUMO. As soon as cyclists enter the intersection area, the social force model takes over control.  Movements are synchronized between SUMO and the social force model by using the TraCI interface. Switching toLibsumo is possible by uncomming a config variable in the beginning of the script, but this will [prevent simulation with the SUMO GUI.]([Libsumo - SUMO Documentation](https://sumo.dlr.de/docs/Libsumo.html#limitations)) A third demo simulates a larger SUMO scenario with four intersections. 
+The package comes with three demos. The first demo shows a simple interaction between three cyclists in open space. The script is pre-coded with an encroachment conflict and runs as a standalone without SUMO. Running the script produces an animation of the interaction and a plot of the vehicle states.  The second demo shows co-simulation of an intersection with SUMO. It launches the SUMO GUI and creates a small scenario of a three-legged intersection with random bicycle demand. On the road segments, cyclists are controlled by SUMO. As soon as cyclists enter the intersection area, the social force model takes over control.  Movements are synchronized between SUMO and the social force model by using the TraCI interface. Switching toLibsumo is possible by uncomming a config variable in the beginning of the script, but this will [prevent simulation with the SUMO GUI](https://sumo.dlr.de/docs/Libsumo.html#limitations). A third demo simulates a larger SUMO scenario with four intersections. 
 
 **Running the demos:**
 
