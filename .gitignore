@@ -9,6 +9,8 @@ __pycache__/
 *.pdf
 *.png
 *.gif
+*.pgf
+*.html
 
 # C and Fortran extensions
 *.so

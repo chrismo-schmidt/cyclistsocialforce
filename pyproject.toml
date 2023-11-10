@@ -6,18 +6,21 @@ build-backend = "setuptools.build_meta"
 name = "cyclistsocialforce"
 description = "Microscopic simulation of cyclist interactions on intersections with compatibility to Eclipse SUMO"
 readme = "README.md"
-version = "0.1.1"
+version = "1.1.0"
 license = {file = "LICENSE"}
 authors = [
 	{name = "Christoph M. Schmidt", email = "c.m.schmidt@tudelft.nl"}
 ]
-requires-python = ">3.9"
+requires-python = ">3.11"
 dependencies = [
 	"numpy >= 1.25",
 	"matplotlib >= 3.7",
 	"scipy >= 1.10",
 	"sumolib",
 	"traci",
+	"control",
+	"pyqt5",
+	"libsumo",
 ]
 	
 [tool.setuptools.packages.find]
