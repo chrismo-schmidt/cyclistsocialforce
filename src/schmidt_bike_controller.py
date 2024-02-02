@@ -48,14 +48,14 @@ Gunity = cn.TransferFunction(1, 1, s)
 Ginner = cn.Feedback(Dcont*Gdelta, Gtheta)
 char_eq = Ginner.doit().simplify().expand().den
 
-tab = routh_table(char_eq, s)
+tab_inner = routh_table(char_eq, s)
 
-sm.pprint(tab[:, 0])
+sm.pprint(tab_inner[:, 0])
 
 # NOTE : Shouldn't have to call .doit() on Ginner for this to work.
 Gouter = cn.Feedback(PIcont*Ginner.doit()*Gpsi, Gunity)
 char_eq = Gouter.doit().simplify().expand().den
 
-tab = routh_table(char_eq, s)
+tab_outer = routh_table(char_eq, s)
 
-sm.pprint(tab[:, 0])
+sm.pprint(tab_outer[:, 0])
