@@ -30,7 +30,7 @@ def routh_table(polynomial, var):
 
 Ib, Is, c, m, h, g, l2, l1 = sm.symbols('I_b, I_s, c, m, h, g, l2, l1',
                                         real=True, nonnegative=True)
-KD, v = sm.symbols('K_D, v', real=True)
+KD, KP, v = sm.symbols('K_D, K_P, v', real=True)
 s = sm.symbols('s')
 
 tau1_sq = (Ib + m*h**2)/m/g/h
@@ -41,13 +41,21 @@ K = v**2/g/(l1 + l2)
 Gtheta = cn.TransferFunction(-K*(tau2*s + 1), tau1_sq*s**2 - 1, s)
 Gdelta = cn.TransferFunction(1, Is*s**2 + c*s, s)
 Gpsi = cn.TransferFunction(1, tau3*s, s)
+Dcont = cn.TransferFunction(KD*s, 1, s)
+PIcont = cn.TransferFunction(KP, s, s)
+Gunity = cn.TransferFunction(1, 1, s)
 
-# NOTE : Can't multiply a symbol times a TransferFunction, so awkward how to
-# multiple a gain.
-Ginner = cn.Feedback(cn.TransferFunction(KD*s*Gdelta.num, Gdelta.den, s), Gtheta)
+Ginner = cn.Feedback(Dcont*Gdelta, Gtheta)
 char_eq = sm.simplify(Ginner.doit()).expand().den
 
 tab = routh_table(char_eq, s)
 
 sm.pprint(tab[:, 0])
 
+# NOTE : Shouldn't have to rewrite Ginner for this to work.
+Gouter = cn.Feedback(PIcont*Ginner.rewrite(cn.TransferFunction)*Gpsi, Gunity)
+char_eq = sm.simplify(Gouter.doit()).expand().den
+
+tab = routh_table(char_eq, s)
+
+sm.pprint(tab[:, 0])
