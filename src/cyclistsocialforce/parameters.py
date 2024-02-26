@@ -1138,25 +1138,30 @@ class InvPendulumBicycleParameters(BicycleParameters):
 
         return K, K_tau_2
 
-    def r1_adaptive_gain(self, v: float) -> tuple[float, float, float]:
-        """Calculate the adaptive PID gains for the controler R1 of the yaw
+    def r1_adaptive_gain(self, v=None):
+        """Calculate the constant PID gains for the controler R1 of the yaw
         angle control.
 
         Parameters
         ----------
         v : float
-            Current bicycle speed.
+            Does nothing. Kept for compatibility. Default is None
 
         Returns
         -------
         K : tuple[float, float, float]
             PID gains given as (Kp, Ki, Kd).
 
+        Changelog
+        ---------
+
+        With 1.1.1, this function does not return adaptive gains anymore.
+        Instead, the Kp and Ki gains are static. This relates to the
+        changes made during the review process of the corresponding paper.
+
         """
 
-        v_min = self.min_stable_speed_inner()
-
-        return (self.k_p_r1, self.k_i0_r1 * (1 - v_min / v), 0.0)
+        return (self.k_p_r1, self.k_i0_r1, 0.0)
 
     def r2_adaptive_gain(self, v: float) -> tuple[float, float, float]:
         """Calculate the adaptive PID gains for the controler R2 of the lean/
