@@ -1123,7 +1123,7 @@ class Bicycle(Vehicle):
                 self.s[0],
                 self.s[1] + 1,
                 self.id,
-                color=(1.0, 1.0, 1.0),
+                color="black",
                 fontsize=8,
                 animated=animated,
                 zorder=4,
